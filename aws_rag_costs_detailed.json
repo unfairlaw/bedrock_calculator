@@ -1,0 +1,158 @@
+[
+  {
+    "scenario": "CEN\u00c1RIO 1: Piloto - Pequeno Porte",
+    "setup_one_time": 6.130050000000001,
+    "monthly_infrastructure": 350.506573638916,
+    "monthly_queries": 11.805050000000001,
+    "monthly_total": 362.311623638916,
+    "yearly_total": 4353.869533666992,
+    "breakdown": {
+      "ingestion": {
+        "textract_ocr": 1.5,
+        "textract_tables": 3.0,
+        "claude_vision_input": 0.45,
+        "claude_vision_output": 1.125,
+        "text_embeddings": 0.01,
+        "image_embeddings": 0.030000000000000002,
+        "s3_storage_monthly": 0.050986328125,
+        "s3_put_requests": 0.012549999999999999,
+        "dynamodb_storage_monthly": 0.002384185791015625,
+        "dynamodb_writes": 0.0025,
+        "storage_gb": 2.216796875,
+        "dynamodb_storage_gb": 0.0095367431640625,
+        "total_chunks": 2000
+      },
+      "opensearch": {
+        "ocus": 2,
+        "compute_monthly": 350.4,
+        "storage_monthly": 0.053203125000000004,
+        "total_monthly": 350.45320312499996
+      },
+      "queries": {
+        "query_embeddings": 0.001,
+        "rerank": 1.0,
+        "claude_input": 6.3,
+        "claude_output": 4.5,
+        "s3_get_requests": 0.0028,
+        "dynamodb_reads": 0.00125
+      }
+    }
+  },
+  {
+    "scenario": "CEN\u00c1RIO 2: Produ\u00e7\u00e3o - M\u00e9dio Porte",
+    "setup_one_time": 54.279,
+    "monthly_infrastructure": 351.2050395965576,
+    "monthly_queries": 154.07,
+    "monthly_total": 505.2750395965576,
+    "yearly_total": 6117.579475158691,
+    "breakdown": {
+      "ingestion": {
+        "textract_ocr": 11.25,
+        "textract_tables": 30.0,
+        "claude_vision_input": 3.6,
+        "claude_vision_output": 9.0,
+        "text_embeddings": 0.075,
+        "image_embeddings": 0.24000000000000002,
+        "s3_storage_monthly": 0.385205078125,
+        "s3_put_requests": 0.09525,
+        "dynamodb_storage_monthly": 0.017881393432617188,
+        "dynamodb_writes": 0.01875,
+        "storage_gb": 16.748046875,
+        "dynamodb_storage_gb": 0.07152557373046875,
+        "total_chunks": 15000
+      },
+      "opensearch": {
+        "ocus": 2,
+        "compute_monthly": 350.4,
+        "storage_monthly": 0.401953125,
+        "total_monthly": 350.80195312499995
+      },
+      "queries": {
+        "query_embeddings": 0.01,
+        "rerank": 10.0,
+        "claude_input": 99.0,
+        "claude_output": 45.0,
+        "s3_get_requests": 0.04,
+        "dynamodb_reads": 0.02
+      }
+    }
+  },
+  {
+    "scenario": "CEN\u00c1RIO 3: Enterprise - Grande Porte",
+    "setup_one_time": 318.06100000000004,
+    "monthly_infrastructure": 354.75474243164064,
+    "monthly_queries": 890.415,
+    "monthly_total": 1245.1697424316405,
+    "yearly_total": 15260.097909179685,
+    "breakdown": {
+      "ingestion": {
+        "textract_ocr": 60.0,
+        "textract_tables": 180.0,
+        "claude_vision_input": 21.6,
+        "claude_vision_output": 54.0,
+        "text_embeddings": 0.4,
+        "image_embeddings": 1.44,
+        "s3_storage_monthly": 2.084375,
+        "s3_put_requests": 0.521,
+        "dynamodb_storage_monthly": 0.095367431640625,
+        "dynamodb_writes": 0.1,
+        "storage_gb": 90.625,
+        "dynamodb_storage_gb": 0.3814697265625,
+        "total_chunks": 80000
+      },
+      "opensearch": {
+        "ocus": 2,
+        "compute_monthly": 350.4,
+        "storage_monthly": 2.1750000000000003,
+        "total_monthly": 352.575
+      },
+      "queries": {
+        "query_embeddings": 0.05,
+        "rerank": 50.0,
+        "claude_input": 615.0,
+        "claude_output": 225.0,
+        "s3_get_requests": 0.24000000000000002,
+        "dynamodb_reads": 0.125
+      }
+    }
+  },
+  {
+    "scenario": "CEN\u00c1RIO 4: Empresa Grande - Escala Industrial",
+    "setup_one_time": 672.7775,
+    "monthly_infrastructure": 1060.9063735961913,
+    "monthly_queries": 2671.245,
+    "monthly_total": 3732.151373596191,
+    "yearly_total": 45458.59398315429,
+    "breakdown": {
+      "ingestion": {
+        "textract_ocr": 135.0,
+        "textract_tables": 375.0,
+        "claude_vision_input": 45.0,
+        "claude_vision_output": 112.5,
+        "text_embeddings": 0.9,
+        "image_embeddings": 3.0,
+        "s3_storage_monthly": 4.644921875,
+        "s3_put_requests": 1.1525,
+        "dynamodb_storage_monthly": 0.21457672119140625,
+        "dynamodb_writes": 0.22499999999999998,
+        "storage_gb": 201.953125,
+        "dynamodb_storage_gb": 0.858306884765625,
+        "total_chunks": 180000
+      },
+      "opensearch": {
+        "ocus": 6,
+        "compute_monthly": 1051.2,
+        "storage_monthly": 4.846875,
+        "total_monthly": 1056.046875
+      },
+      "queries": {
+        "query_embeddings": 0.15,
+        "rerank": 150.0,
+        "claude_input": 1845.0,
+        "claude_output": 675.0,
+        "s3_get_requests": 0.7200000000000001,
+        "dynamodb_reads": 0.375
+      }
+    }
+  }
+]
