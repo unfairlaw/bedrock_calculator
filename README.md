@@ -12,6 +12,9 @@ A comprehensive collection of AWS cost calculators designed for AI agent integra
 │                 AWS Cost Calculator Suite                        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
+│  🤖 AI Cost Agent                  (Intelligent Interface)      │
+│      └─ Natural language queries → automatic routing            │
+│                                                                  │
 │  1️⃣  RAG Cost Calculator          (Specialized)                 │
 │      └─ Bedrock, OpenSearch, Textract                           │
 │                                                                  │
@@ -23,6 +26,52 @@ A comprehensive collection of AWS cost calculators designed for AI agent integra
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+## 🤖 AI Cost Agent (NEW!)
+
+**The easiest way to estimate AWS costs - just ask in natural language!**
+
+**File:** `aws_cost_agent.py`
+
+The AI Cost Agent automatically routes your questions to the right calculator:
+
+```bash
+# Interactive mode
+python3 aws_cost_agent.py
+
+You: How much for a RAG system with 100 manuals and 10,000 queries/month?
+Agent: [Shows detailed RAG cost breakdown]
+
+You: What about 4 t3.medium instances?
+Agent: [Shows EC2 cost estimate]
+
+You: Generate a calculator for RDS
+Agent: [Creates RDS calculator dynamically]
+```
+
+**Key Features:**
+- 🗣️ **Natural Language** - Ask questions like you would a colleague
+- 🎯 **Smart Routing** - Automatically picks the right calculator
+- 📊 **Formatted Output** - Clear, easy-to-read cost breakdowns
+- 🔄 **Conversational** - Maintains context across queries
+
+**Demo Mode:**
+```bash
+python3 aws_cost_agent.py demo
+```
+
+**Programmatic Usage:**
+```python
+from aws_cost_agent import AWSCostAgent
+
+agent = AWSCostAgent()
+response = agent.process("How much for 10 t3.large instances?")
+print(response)
+```
+
+📄 **Full Documentation:** [AGENT_README.md](AGENT_README.md)
+
+---
 
 ## 🎯 Calculators
 
@@ -210,17 +259,15 @@ cd bedrock_calculator
 ### Run Calculators
 
 ```bash
-# RAG Calculator
-python3 aws_rag_cost_calculator.py
+# 🤖 AI Cost Agent (Recommended - easiest to use!)
+python3 aws_cost_agent.py          # Interactive mode
+python3 aws_cost_agent.py demo     # Demo mode
 
-# Compute/Storage Calculator
-python3 aws_compute_storage_calculator.py
-
-# Abstract Calculator Demo
-python3 aws_abstract_calculator.py
-
-# Abstract Calculator Examples
-python3 example_generate_calculator.py
+# Direct calculator access
+python3 aws_rag_cost_calculator.py              # RAG Calculator
+python3 aws_compute_storage_calculator.py       # Compute/Storage Calculator
+python3 aws_abstract_calculator.py              # Abstract Calculator Demo
+python3 example_generate_calculator.py          # Abstract Examples
 ```
 
 ## 🤖 AI Agent Integration
@@ -287,16 +334,24 @@ tools = [
 
 ```
 bedrock_calculator/
-├── README.md                               # This file
+├── README.md                               # Main documentation
+├── .gitignore                              # Git ignore rules
 │
+├── 🤖 AI Agent
+├── aws_cost_agent.py                       # AI agent (routes to calculators)
+├── AGENT_README.md                         # Agent documentation
+│
+├── 1️⃣ RAG Calculator
 ├── aws_rag_cost_calculator.py              # RAG calculator
 ├── aws_rag_costs_detailed.json             # RAG sample results
 ├── AWS_RAG_COST_ANALYSIS.md                # RAG detailed analysis
 ├── EXECUTIVE_SUMMARY.md                    # RAG executive summary
 │
+├── 2️⃣ Compute/Storage Calculator
 ├── aws_compute_storage_calculator.py       # Compute/storage calculator
 ├── aws_compute_storage_costs.json          # Compute sample results
 │
+├── 3️⃣ Abstract Calculator
 ├── aws_abstract_calculator.py              # Abstract calculator core
 ├── example_generate_calculator.py          # Abstract calculator examples
 ├── ABSTRACT_CALCULATOR_README.md           # Abstract calculator docs
