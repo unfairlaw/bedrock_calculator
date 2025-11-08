@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cost Agent - AI-Powered Cost Estimation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>
+                    <span class="logo">🤖</span>
+                    AWS Cost Agent
+                </h1>
+                <p class="subtitle">AI-powered AWS cost estimation in natural language</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="stat-label">Available Tools</span>
+                    <span class="stat-value" id="tools-count">3</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Queries</span>
+                    <span class="stat-value" id="query-count">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>💡 Example Queries</h3>
+                    <div id="examples-container" class="examples-container">
+                        <div class="loading">Loading examples...</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>🛠️ Available Calculators</h3>
+                    <div id="tools-container" class="tools-container">
+                        <div class="loading">Loading tools...</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <button class="btn btn-secondary" id="clear-btn">
+                        🗑️ Clear Conversation
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <!-- Messages -->
+                <div class="messages" id="messages">
+                    <div class="welcome-message">
+                        <h2>👋 Welcome to AWS Cost Agent</h2>
+                        <p>I can help you estimate AWS costs using natural language queries.</p>
+                        <p>Try asking:</p>
+                        <ul>
+                            <li>"How much for 10 t3.medium instances?"</li>
+                            <li>"Estimate RAG costs for 100 manuals"</li>
+                            <li>"What would 5 million Lambda invocations cost?"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-container">
+                    <form id="query-form">
+                        <div class="input-wrapper">
+                            <input
+                                type="text"
+                                id="query-input"
+                                placeholder="Ask about AWS costs... (e.g., 'How much for 4 t3.medium instances?')"
+                                autocomplete="off"
+                            >
+                            <button type="submit" class="btn btn-primary" id="send-btn">
+                                <span id="send-btn-text">Send</span>
+                                <span id="send-btn-loader" class="loader" style="display: none;"></span>
+                            </button>
+                        </div>
+                        <div class="input-hint">
+                            Press <kbd>Enter</kbd> to send • <kbd>Shift + Enter</kbd> for new line
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                Powered by AWS Cost Calculator Suite •
+                <a href="https://github.com/unfairlaw/bedrock_calculator" target="_blank">GitHub</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

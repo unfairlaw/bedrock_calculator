@@ -73,6 +73,66 @@ print(response)
 
 ---
 
+## 🌐 Web Interface (NEW!)
+
+**Beautiful web UI with REST API - the easiest way to use the agent!**
+
+**Files:** `app.py`, `templates/`, `static/`
+
+### Quick Start
+
+```bash
+# Option 1: Use startup script
+./start.sh              # Linux/Mac
+start.bat               # Windows
+
+# Option 2: Manual start
+pip install Flask flask-cors
+python3 app.py
+```
+
+Then open http://localhost:5000 in your browser!
+
+### Features
+
+- 💬 **Chat Interface** - ChatGPT-style conversation UI
+- 📱 **Responsive Design** - Works on desktop, tablet, and mobile
+- 🎨 **Modern UI** - Clean, professional interface
+- 🔗 **REST API** - Full API for integration
+- 💡 **Example Queries** - One-click examples
+- 📊 **Real-time Estimation** - Instant cost breakdowns
+
+### API Endpoints
+
+```
+GET  /                    - Web interface
+POST /api/estimate        - Cost estimation
+GET  /api/tools           - Available calculators
+GET  /api/examples        - Example queries
+GET  /api/health          - Health check
+```
+
+### API Example
+
+```bash
+curl -X POST http://localhost:5000/api/estimate \
+  -H "Content-Type: application/json" \
+  -d '{"query": "How much for 10 t3.medium instances?"}'
+```
+
+```python
+import requests
+
+response = requests.post('http://localhost:5000/api/estimate', json={
+    'query': 'Estimate RAG costs for 100 manuals'
+})
+print(response.json()['message'])
+```
+
+📄 **Full Documentation:** [FLASK_API_README.md](FLASK_API_README.md)
+
+---
+
 ## 🎯 Calculators
 
 ### 1. RAG Cost Calculator
@@ -336,6 +396,20 @@ tools = [
 bedrock_calculator/
 ├── README.md                               # Main documentation
 ├── .gitignore                              # Git ignore rules
+├── requirements.txt                        # Python dependencies
+│
+├── 🌐 Web Interface (NEW!)
+├── app.py                                  # Flask API server
+├── start.sh                                # Linux/Mac startup script
+├── start.bat                               # Windows startup script
+├── FLASK_API_README.md                     # Flask documentation
+├── templates/
+│   └── index.html                          # Web UI template
+└── static/
+    ├── css/
+    │   └── style.css                       # Styles
+    └── js/
+        └── app.js                          # JavaScript client
 │
 ├── 🤖 AI Agent
 ├── aws_cost_agent.py                       # AI agent (routes to calculators)
