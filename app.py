@@ -9,15 +9,34 @@ from flask_cors import CORS
 import os
 import json
 from datetime import datetime
+
+# Import both agent types
 from aws_cost_agent import AWSCostAgent, ToolType
+
+# Try to import Bedrock agent (optional)
+try:
+    from aws_bedrock_agent import AWSBedrockCostAgent, BedrockConfig
+    BEDROCK_AVAILABLE = True
+except ImportError:
+    BEDROCK_AVAILABLE = False
+    print("⚠️  Bedrock agent not available (boto3 not installed)")
 
 app = Flask(__name__,
             static_folder='static',
             template_folder='templates')
 CORS(app)  # Enable CORS for all routes
 
-# Initialize the cost agent
-agent = AWSCostAgent()
+# Determine which agent to use based on environment variable
+USE_BEDROCK = os.getenv('USE_BEDROCK', 'false').lower() == 'true'
+AGENT_MODE = 'bedrock' if (USE_BEDROCK and BEDROCK_AVAILABLE) else 'regex'
+
+print(f"\n🤖 Agent Mode: {AGENT_MODE.upper()}")
+if AGENT_MODE == 'bedrock':
+    print("   Using AWS Bedrock with Claude 3.5 Sonnet")
+    print(f"   Region: {os.getenv('AWS_REGION', 'us-east-1')}")
+else:
+    print("   Using regex-based routing")
+print()
 
 # Store conversation sessions (in production, use Redis or database)
 sessions = {}
@@ -35,7 +54,9 @@ def health():
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.now().isoformat(),
-        'version': '1.0.0'
+        'version': '1.0.0',
+        'agent_mode': AGENT_MODE,
+        'bedrock_available': BEDROCK_AVAILABLE
     })
 
 
@@ -71,9 +92,12 @@ def estimate():
         query = data['query']
         session_id = data.get('session_id', 'default')
 
-        # Get or create session
+        # Get or create session with appropriate agent type
         if session_id not in sessions:
-            sessions[session_id] = AWSCostAgent()
+            if AGENT_MODE == 'bedrock':
+                sessions[session_id] = AWSBedrockCostAgent()
+            else:
+                sessions[session_id] = AWSCostAgent()
 
         session_agent = sessions[session_id]
 

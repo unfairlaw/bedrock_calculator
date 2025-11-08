@@ -12,9 +12,17 @@ services:
     environment:
       - FLASK_ENV=production
       - PYTHONUNBUFFERED=1
+      # Agent Mode: Set to 'true' to use AWS Bedrock AI
+      - USE_BEDROCK=${USE_BEDROCK:-false}
+      # AWS Credentials (Required if USE_BEDROCK=true)
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
     volumes:
       # Optional: Mount pricing cache for persistence
       - ./pricing_cache:/app/.aws_pricing_cache
+    env_file:
+      - .env  # Load from .env file (optional)
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health')"]

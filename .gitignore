@@ -35,6 +35,9 @@ ENV/
 # AWS Pricing Cache
 .aws_pricing_cache/
 
+# Environment variables (contains secrets!)
+.env
+
 # OS
 .DS_Store
 Thumbs.db

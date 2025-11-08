@@ -31,9 +31,12 @@ A comprehensive collection of AWS cost calculators designed for AI agent integra
 
 **The easiest way to estimate AWS costs - just ask in natural language!**
 
-**File:** `aws_cost_agent.py`
+**Files:** `aws_cost_agent.py` (regex-based), `aws_bedrock_agent.py` (real AI)
 
-The AI Cost Agent automatically routes your questions to the right calculator:
+The AI Cost Agent comes in **TWO modes**:
+
+### 1. Regex Mode (Default - No AWS Credentials Needed)
+Fast pattern-matching agent that routes queries to calculators:
 
 ```bash
 # Interactive mode
@@ -44,32 +47,63 @@ Agent: [Shows detailed RAG cost breakdown]
 
 You: What about 4 t3.medium instances?
 Agent: [Shows EC2 cost estimate]
-
-You: Generate a calculator for RDS
-Agent: [Creates RDS calculator dynamically]
 ```
 
 **Key Features:**
-- 🗣️ **Natural Language** - Ask questions like you would a colleague
-- 🎯 **Smart Routing** - Automatically picks the right calculator
-- 📊 **Formatted Output** - Clear, easy-to-read cost breakdowns
-- 🔄 **Conversational** - Maintains context across queries
+- ✅ Works offline
+- ✅ No AWS account required
+- ✅ Fast (~50ms)
+- ✅ Free
 
-**Demo Mode:**
+### 2. Bedrock Mode (Real AI - Requires AWS) ⭐ NEW!
+True AI understanding with Claude 3.5 Sonnet via AWS Bedrock:
+
 ```bash
-python3 aws_cost_agent.py demo
+# Set environment variables
+export USE_BEDROCK=true
+export AWS_ACCESS_KEY_ID=your_key
+export AWS_SECRET_ACCESS_KEY=your_secret
+export AWS_REGION=us-east-1
+
+# Run Flask app with Bedrock AI
+python3 app.py
+```
+
+**Key Features:**
+- ✅ **True AI understanding** with Claude 3.5 Sonnet
+- ✅ Natural language comprehension
+- ✅ Tool calling (function calling)
+- ✅ Multi-turn conversations
+- ✅ Context awareness
+- 💰 Small cost per query (~$0.01)
+
+**Example Queries Bedrock Handles Better:**
+```
+"I need to process technical documents for my engineering team.
+ We have about 200 manuals, each around 150 pages with lots of
+ diagrams. We expect maybe 50,000 queries per month. What would
+ this cost me using AWS?"
+
+"My startup needs compute resources. We're running a web app
+ that needs to handle moderate traffic - maybe 4 medium-sized
+ instances should do it. What's the monthly cost if they run 24/7?"
 ```
 
 **Programmatic Usage:**
 ```python
+# Regex mode
 from aws_cost_agent import AWSCostAgent
-
 agent = AWSCostAgent()
 response = agent.process("How much for 10 t3.large instances?")
-print(response)
+
+# Bedrock mode (requires AWS credentials)
+from aws_bedrock_agent import AWSBedrockCostAgent
+agent = AWSBedrockCostAgent()
+response = agent.process("What would 100 manuals with 10K monthly queries cost?")
 ```
 
-📄 **Full Documentation:** [AGENT_README.md](AGENT_README.md)
+📄 **Regex Mode Documentation:** [AGENT_README.md](AGENT_README.md)
+📄 **Bedrock AI Documentation:** [BEDROCK_README.md](BEDROCK_README.md) ⭐
 
 ---
 
@@ -320,8 +354,12 @@ cd bedrock_calculator
 
 ```bash
 # 🤖 AI Cost Agent (Recommended - easiest to use!)
-python3 aws_cost_agent.py          # Interactive mode
-python3 aws_cost_agent.py demo     # Demo mode
+python3 aws_cost_agent.py          # Regex mode (interactive)
+python3 aws_cost_agent.py demo     # Regex mode (demo)
+
+# 🌐 Web Interface with Bedrock AI (Best experience!)
+export USE_BEDROCK=true            # Enable Bedrock mode (requires AWS credentials)
+python3 app.py                     # Flask server with web UI
 
 # Direct calculator access
 python3 aws_rag_cost_calculator.py              # RAG Calculator
@@ -338,7 +376,17 @@ The easiest way to deploy in production:
 # Option 1: Docker Compose (Recommended)
 docker-compose up -d
 
-# Option 2: Docker CLI
+# Option 2: Docker Compose with Bedrock AI ⭐
+# Create .env file with AWS credentials first
+cat > .env <<EOF
+USE_BEDROCK=true
+AWS_ACCESS_KEY_ID=your_key
+AWS_SECRET_ACCESS_KEY=your_secret
+AWS_REGION=us-east-1
+EOF
+docker-compose up -d
+
+# Option 3: Docker CLI
 docker build -t aws-cost-agent .
 docker run -d -p 5000:5000 --name aws-cost-agent aws-cost-agent
 ```
@@ -352,6 +400,8 @@ docker run -d -p 5000:5000 --name aws-cost-agent aws-cost-agent
 - ✅ Optional Nginx reverse proxy
 - ✅ Volume mounts for caching
 - ✅ Environment variable configuration
+- ✅ AWS Bedrock AI support ⭐ NEW
+- ✅ Dual-mode operation (regex/Bedrock)
 - ✅ Cloud-ready (AWS ECS, GCP Cloud Run, Azure)
 
 **Docker Commands:**
@@ -359,8 +409,11 @@ docker run -d -p 5000:5000 --name aws-cost-agent aws-cost-agent
 # Build
 docker-compose build
 
-# Start
+# Start (regex mode)
 docker-compose up -d
+
+# Start with Bedrock AI
+USE_BEDROCK=true docker-compose up -d
 
 # View logs
 docker-compose logs -f
@@ -443,16 +496,17 @@ bedrock_calculator/
 ├── README.md                               # Main documentation
 ├── .gitignore                              # Git ignore rules
 ├── requirements.txt                        # Python dependencies
+├── .env.example                            # AWS credentials template ⭐ NEW
 │
 ├── 🐳 Docker (NEW!)
 ├── Dockerfile                              # Docker image definition
 ├── .dockerignore                           # Docker build exclusions
-├── docker-compose.yml                      # Docker Compose config
+├── docker-compose.yml                      # Docker Compose config (with AWS support)
 ├── nginx.conf                              # Nginx reverse proxy config
 ├── DOCKER_README.md                        # Docker documentation
 │
 ├── 🌐 Web Interface
-├── app.py                                  # Flask API server
+├── app.py                                  # Flask API server (dual-mode support)
 ├── start.sh                                # Linux/Mac startup script
 ├── start.bat                               # Windows startup script
 ├── FLASK_API_README.md                     # Flask documentation
@@ -465,8 +519,10 @@ bedrock_calculator/
         └── app.js                          # JavaScript client
 │
 ├── 🤖 AI Agent
-├── aws_cost_agent.py                       # AI agent (routes to calculators)
-├── AGENT_README.md                         # Agent documentation
+├── aws_cost_agent.py                       # Regex-based agent
+├── aws_bedrock_agent.py                    # Bedrock AI agent ⭐ NEW
+├── AGENT_README.md                         # Regex agent documentation
+├── BEDROCK_README.md                       # Bedrock AI documentation ⭐ NEW
 │
 ├── 1️⃣ RAG Calculator
 ├── aws_rag_cost_calculator.py              # RAG calculator
@@ -646,7 +702,8 @@ print(f"AI/RAG: ${rag_costs['monthly_total']:,.2f}")
 
 ## 🔮 Future Enhancements
 
-- [ ] Web UI for interactive cost estimation
+- [x] Web UI for interactive cost estimation ✅ (Completed!)
+- [x] Real AI integration with AWS Bedrock ✅ (Completed!)
 - [ ] Reserved Instance pricing support
 - [ ] Spot Instance calculations
 - [ ] Savings Plans recommendations
@@ -656,6 +713,8 @@ print(f"AI/RAG: ${rag_costs['monthly_total']:,.2f}")
 - [ ] Budget alerting
 - [ ] Cost optimization suggestions
 - [ ] GraphQL API
+- [ ] Multi-region cost comparison
+- [ ] PDF/Excel report generation
 
 ## 📈 Performance
 
@@ -701,6 +760,9 @@ For questions or issues:
 
 These calculators are specifically designed to be used as tools by AI agents, enabling intelligent cost estimation and optimization in conversational interfaces.
 
-**Version:** 1.0.0
+Now featuring **real AI integration with AWS Bedrock and Claude 3.5 Sonnet** for true natural language understanding!
+
+**Version:** 2.0.0 (Bedrock AI Update)
 **Last Updated:** 2025-11-08
 **Python:** 3.8+
+**AI Model:** Claude 3.5 Sonnet (via AWS Bedrock)
