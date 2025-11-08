@@ -1,0 +1,231 @@
+[
+  {
+    "scenario": "SCENARIO 1: Small Startup - Web Application",
+    "monthly_total": 193.43599999999998,
+    "yearly_total": 2321.232,
+    "breakdown": {
+      "ec2": {
+        "total_monthly": 104.73599999999999,
+        "compute_cost": 60.736,
+        "storage_cost": 8.0,
+        "transfer_cost": 36.0,
+        "instances": [
+          {
+            "instance_type": "t3.medium",
+            "num_instances": 2,
+            "hours_per_month": 730,
+            "compute_cost": 60.736,
+            "storage_cost": 8.0,
+            "transfer_cost": 36.0,
+            "total": 104.73599999999999
+          }
+        ]
+      },
+      "lambda": {
+        "total_monthly": 0.2,
+        "request_cost": 0.2,
+        "compute_cost": 0.0,
+        "transfer_cost": 0.0,
+        "monthly_invocations": 2000000,
+        "total_gb_seconds": 200000.0,
+        "memory_mb": 512,
+        "avg_duration_ms": 200
+      },
+      "s3": {
+        "total_monthly": 88.5,
+        "storage_cost": 23.0,
+        "request_cost": 2.5,
+        "transfer_cost": 63.0,
+        "buckets": [
+          {
+            "storage_class": "Standard",
+            "storage_gb": 1000,
+            "storage_cost": 23.0,
+            "request_cost": 2.5,
+            "transfer_cost": 63.0,
+            "total": 88.5
+          }
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "SCENARIO 2: Medium Business - API Backend",
+    "monthly_total": 1633.8834200000001,
+    "yearly_total": 19606.60104,
+    "breakdown": {
+      "ec2": {
+        "total_monthly": 1031.6,
+        "compute_cost": 744.6,
+        "storage_cost": 80.0,
+        "transfer_cost": 207.0,
+        "instances": [
+          {
+            "instance_type": "m5.xlarge",
+            "num_instances": 4,
+            "hours_per_month": 730,
+            "compute_cost": 560.64,
+            "storage_cost": 64.0,
+            "transfer_cost": 171.0,
+            "total": 795.64
+          },
+          {
+            "instance_type": "r5.large",
+            "num_instances": 2,
+            "hours_per_month": 730,
+            "compute_cost": 183.96,
+            "storage_cost": 16.0,
+            "transfer_cost": 36.0,
+            "total": 235.96
+          }
+        ]
+      },
+      "lambda": {
+        "total_monthly": 54.13342,
+        "request_cost": 1.8,
+        "compute_cost": 43.333420000000004,
+        "transfer_cost": 9.0,
+        "monthly_invocations": 10000000,
+        "total_gb_seconds": 3000000.0,
+        "memory_mb": 1024,
+        "avg_duration_ms": 300
+      },
+      "s3": {
+        "total_monthly": 548.15,
+        "storage_cost": 240.0,
+        "request_cost": 11.15,
+        "transfer_cost": 297.0,
+        "buckets": [
+          {
+            "storage_class": "Standard",
+            "storage_gb": 5000,
+            "storage_cost": 115.0,
+            "request_cost": 10.5,
+            "transfer_cost": 261.0,
+            "total": 386.5
+          },
+          {
+            "storage_class": "Standard-IA",
+            "storage_gb": 10000,
+            "storage_cost": 125.0,
+            "request_cost": 0.65,
+            "transfer_cost": 36.0,
+            "total": 161.65
+          }
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "SCENARIO 3: Serverless-First Architecture",
+    "monthly_total": 1022.7034449999999,
+    "yearly_total": 12272.441339999998,
+    "breakdown": {
+      "ec2": {
+        "total_monthly": 0,
+        "instances": []
+      },
+      "lambda": {
+        "total_monthly": 146.633445,
+        "request_cost": 9.8,
+        "compute_cost": 55.833445000000005,
+        "transfer_cost": 81.0,
+        "monthly_invocations": 50000000,
+        "total_gb_seconds": 3750000.0,
+        "memory_mb": 512,
+        "avg_duration_ms": 150
+      },
+      "s3": {
+        "total_monthly": 876.0699999999999,
+        "storage_cost": 410.0,
+        "request_cost": 25.07,
+        "transfer_cost": 441.0,
+        "buckets": [
+          {
+            "storage_class": "Standard",
+            "storage_gb": 10000,
+            "storage_cost": 230.0,
+            "request_cost": 25.0,
+            "transfer_cost": 441.0,
+            "total": 696.0
+          },
+          {
+            "storage_class": "Glacier Flexible Retrieval",
+            "storage_gb": 50000,
+            "storage_cost": 180.0,
+            "request_cost": 0.07,
+            "transfer_cost": 0.0,
+            "total": 180.07
+          }
+        ]
+      }
+    }
+  },
+  {
+    "scenario": "SCENARIO 4: Enterprise - High Performance Computing",
+    "monthly_total": 22323.90332,
+    "yearly_total": 267886.83984000003,
+    "breakdown": {
+      "ec2": {
+        "total_monthly": 4279.6,
+        "compute_cost": 2642.6,
+        "storage_cost": 1025.0,
+        "transfer_cost": 612.0,
+        "instances": [
+          {
+            "instance_type": "c5.xlarge",
+            "num_instances": 10,
+            "hours_per_month": 730,
+            "compute_cost": 1241.0,
+            "storage_cost": 625.0,
+            "transfer_cost": 441.0,
+            "total": 2307.0
+          },
+          {
+            "instance_type": "m5.2xlarge",
+            "num_instances": 5,
+            "hours_per_month": 730,
+            "compute_cost": 1401.6,
+            "storage_cost": 400.0,
+            "transfer_cost": 171.0,
+            "total": 1972.6
+          }
+        ]
+      },
+      "lambda": {
+        "total_monthly": 1940.80332,
+        "request_cost": 19.8,
+        "compute_cost": 1660.00332,
+        "transfer_cost": 261.0,
+        "monthly_invocations": 100000000,
+        "total_gb_seconds": 100000000.0,
+        "memory_mb": 2048,
+        "avg_duration_ms": 500
+      },
+      "s3": {
+        "total_monthly": 16103.5,
+        "storage_cost": 13800.0,
+        "request_cost": 71.5,
+        "transfer_cost": 2232.0,
+        "buckets": [
+          {
+            "storage_class": "Standard",
+            "storage_gb": 100000,
+            "storage_cost": 2300.0,
+            "request_cost": 65.0,
+            "transfer_cost": 1791.0,
+            "total": 4156.0
+          },
+          {
+            "storage_class": "Intelligent-Tiering",
+            "storage_gb": 500000,
+            "storage_cost": 11500.0,
+            "request_cost": 6.5,
+            "transfer_cost": 441.0,
+            "total": 11947.5
+          }
+        ]
+      }
+    }
+  }
+]
