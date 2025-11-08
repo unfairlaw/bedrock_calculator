@@ -1,0 +1,43 @@
+{
+  "service": "AmazonS3",
+  "name": "Amazon Simple Storage Service",
+  "region": "us-east-1",
+  "categories": 5,
+  "pricing_overview": {
+    "Standard": [
+      {
+        "unit": "GB-Mo",
+        "price": "$0.023",
+        "description": "First 50 TB / month"
+      }
+    ],
+    "Standard-IA": [
+      {
+        "unit": "GB-Mo",
+        "price": "$0.0125",
+        "description": "Standard - Infrequent Access storage"
+      }
+    ],
+    "Glacier": [
+      {
+        "unit": "GB-Mo",
+        "price": "$0.004",
+        "description": "Glacier Instant Retrieval storage"
+      }
+    ],
+    "PUT-Requests": [
+      {
+        "unit": "Requests",
+        "price": "$5e-06",
+        "description": "PUT, COPY, POST, or LIST requests"
+      }
+    ],
+    "GET-Requests": [
+      {
+        "unit": "Requests",
+        "price": "$4e-07",
+        "description": "GET and all other requests"
+      }
+    ]
+  }
+}
