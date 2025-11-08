@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  aws-cost-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aws-cost-agent:latest
+    container_name: aws-cost-agent
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Optional: Mount pricing cache for persistence
+      - ./pricing_cache:/app/.aws_pricing_cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - cost-agent-network
+
+  # Optional: Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: aws-cost-agent-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - aws-cost-agent
+    restart: unless-stopped
+    networks:
+      - cost-agent-network
+    profiles:
+      - production
+
+networks:
+  cost-agent-network:
+    driver: bridge
+
+volumes:
+  pricing_cache:
+    driver: local

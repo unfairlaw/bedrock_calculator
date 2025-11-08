@@ -330,6 +330,52 @@ python3 aws_abstract_calculator.py              # Abstract Calculator Demo
 python3 example_generate_calculator.py          # Abstract Examples
 ```
 
+### 🐳 Docker Deployment (Recommended for Production)
+
+The easiest way to deploy in production:
+
+```bash
+# Option 1: Docker Compose (Recommended)
+docker-compose up -d
+
+# Option 2: Docker CLI
+docker build -t aws-cost-agent .
+docker run -d -p 5000:5000 --name aws-cost-agent aws-cost-agent
+```
+
+**Access:** http://localhost:5000
+
+**Features:**
+- ✅ Production-ready with Gunicorn
+- ✅ Health checks and auto-restart
+- ✅ Optimized multi-stage build (~150MB)
+- ✅ Optional Nginx reverse proxy
+- ✅ Volume mounts for caching
+- ✅ Environment variable configuration
+- ✅ Cloud-ready (AWS ECS, GCP Cloud Run, Azure)
+
+**Docker Commands:**
+```bash
+# Build
+docker-compose build
+
+# Start
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop
+docker-compose down
+
+# With Nginx reverse proxy
+docker-compose --profile production up -d
+```
+
+📄 **Full Documentation:** [DOCKER_README.md](DOCKER_README.md)
+
+---
+
 ## 🤖 AI Agent Integration
 
 All three calculators are designed to be used as tools by AI agents.
@@ -398,7 +444,14 @@ bedrock_calculator/
 ├── .gitignore                              # Git ignore rules
 ├── requirements.txt                        # Python dependencies
 │
-├── 🌐 Web Interface (NEW!)
+├── 🐳 Docker (NEW!)
+├── Dockerfile                              # Docker image definition
+├── .dockerignore                           # Docker build exclusions
+├── docker-compose.yml                      # Docker Compose config
+├── nginx.conf                              # Nginx reverse proxy config
+├── DOCKER_README.md                        # Docker documentation
+│
+├── 🌐 Web Interface
 ├── app.py                                  # Flask API server
 ├── start.sh                                # Linux/Mac startup script
 ├── start.bat                               # Windows startup script
