@@ -1,0 +1,64 @@
+{
+  "scenario": {
+    "num_manuals": 10,
+    "avg_pages_per_manual": 100,
+    "images_per_manual": 50,
+    "tables_per_manual": 20,
+    "monthly_queries": 1000,
+    "avg_docs_per_query": 5
+  },
+  "common_costs": {
+    "setup_one_time": 6.115,
+    "s3_storage_monthly": 0.050986328125,
+    "s3_put_cost": 0.012549999999999999,
+    "s3_get_cost": 0.0028,
+    "query_embeddings": 0.001,
+    "rerank": 1.0,
+    "claude_input": 6.3,
+    "claude_output": 4.5,
+    "storage_gb": 2.216796875,
+    "total_chunks": 2000,
+    "vector_dimension_size_mb": 11.71875
+  },
+  "options": {
+    "opensearch_serverless": {
+      "name": "OpenSearch Serverless + S3",
+      "vector_db_compute": 350.4,
+      "vector_db_storage": 0.053203125000000004,
+      "metadata_storage": 0.002384185791015625,
+      "metadata_writes_setup": 0.0025,
+      "metadata_reads_monthly": 0.00125,
+      "monthly_infrastructure": 350.506573638916,
+      "monthly_queries": 11.805050000000001,
+      "monthly_total": 362.311623638916,
+      "setup_total": 6.130050000000001,
+      "yearly_total": 4353.869533666992
+    },
+    "rds_pgvector": {
+      "name": "RDS pgvector + S3",
+      "vector_db_compute": 62.050000000000004,
+      "vector_db_storage": 0.31374771118164063,
+      "metadata_storage": 0,
+      "metadata_writes_setup": 0,
+      "metadata_reads_monthly": 0,
+      "monthly_infrastructure": 62.414734039306644,
+      "monthly_queries": 11.8038,
+      "monthly_total": 74.21853403930665,
+      "setup_total": 6.12755,
+      "yearly_total": 896.7499584716799
+    },
+    "pinecone_serverless": {
+      "name": "Pinecone Serverless + S3",
+      "vector_db_compute": 0,
+      "vector_db_storage": 0.00286102294921875,
+      "metadata_storage": 0,
+      "metadata_writes_setup": 0.004,
+      "metadata_reads_monthly": 0.001,
+      "monthly_infrastructure": 0.05384735107421875,
+      "monthly_queries": 11.8048,
+      "monthly_total": 11.858647351074218,
+      "setup_total": 6.13155,
+      "yearly_total": 148.43531821289062
+    }
+  }
+}
